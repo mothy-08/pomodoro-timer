@@ -3,19 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --background: rgb(24, 24, 27);
+  --foreground: rgb(243, 244, 246);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background-button: rgb(39, 39, 42);
+  --foreground-button: rgb(161, 161, 169);
+
+  --background-button-hover: rgb(63, 63, 69);
+  --foreground-button-hover: rgb(228, 228, 231);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }

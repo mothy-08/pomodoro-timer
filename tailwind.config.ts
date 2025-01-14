@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "bg-btn": "var(--background-button)",
+        "clr-btn": "var(--foreground-button)",
+        "bg-btn-hover": "var(--background-button-hover)",
+        "clr-btn-hover": "var(--foreground-button-hover)",
       },
     },
   },
