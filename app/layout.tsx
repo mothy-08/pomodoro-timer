@@ -1,6 +1,11 @@
 import "./globals.css";
-import { roboto } from "./ui/fonts";
+import { Roboto } from "next/font/google";
 import type { Metadata } from "next";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Pomdoro Timer",
