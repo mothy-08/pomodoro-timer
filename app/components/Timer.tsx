@@ -6,17 +6,32 @@ import clsx from "clsx";
 export default function Timer({
   expiryTimestamp,
   autoStart = false,
+  onExpire,
   duration,
+  activeState,
+  isExpired,
+  onRestartFocus,
+  changeToShortBreak,
+  changeToLongBreak,
 }: {
   expiryTimestamp: Date;
   autoStart?: boolean;
+  onExpire: Function;
   duration: number;
+  activeState: string;
+  isExpired: boolean;
+  onRestartFocus: () => void;
+  changeToShortBreak: () => void;
+  changeToLongBreak: () => void;
 }) {
   const { seconds, minutes, isRunning, start, pause, resume, restart } =
     useTimer({
       expiryTimestamp,
       autoStart,
-      onExpire: () => console.warn("onExpire called"),
+      onExpire: () => {
+        console.warn("onExpire called");
+        onExpire();
+      },
     });
 
   const formatTime = (time: number) => String(time).padStart(2, "0");
@@ -25,10 +40,21 @@ export default function Timer({
   const buttonStyle =
     "py-2 px-4 bg-bg-btn text-clr-btn hover:bg-bg-btn-hover hover:clr-btn-hover rounded-lg";
 
-  function handlePause() {
+  const handlePause = () => {
     setIsPaused(true);
     pause();
-  }
+  };
+
+  const handleResume = () => {
+    setIsPaused(false);
+    resume();
+  };
+
+  const handleReset = (duration: number) => {
+    const time = new Date(new Date().getTime() + duration * 1000);
+    restart(time, false);
+    if (isPaused) setIsPaused(false);
+  };
 
   React.useEffect(() => {
     restart(expiryTimestamp, false);
@@ -46,35 +72,64 @@ export default function Timer({
         <Button
           title="Start"
           onClick={start}
-          buttonStyle={clsx(buttonStyle, isRunning || isPaused ? "hidden" : "")}
+          buttonStyle={clsx(
+            buttonStyle,
+            isRunning || isPaused ? "hidden" : "",
+            isExpired ? "hidden" : ""
+          )}
         />
         <Button
           title="Pause"
           onClick={handlePause}
-          buttonStyle={clsx(buttonStyle, isRunning ? "block" : "hidden")}
+          buttonStyle={clsx(
+            buttonStyle,
+            isRunning ? "block" : "hidden",
+            isExpired ? "hidden" : ""
+          )}
         />
         <Button
           title="Resume"
-          onClick={resume}
+          onClick={handleResume}
           buttonStyle={clsx(
             buttonStyle,
-            !isRunning && isPaused ? "block" : "hidden"
+            !isRunning && isPaused ? "block" : "hidden",
+            isExpired ? "hidden" : ""
           )}
         />
         <Button
           title="Reset"
-          onClick={() => {
-            const time = new Date();
-            time.setSeconds(time.getSeconds() + duration);
-            restart(time, false);
-
-            if (isPaused) setIsPaused(false);
-          }}
+          onClick={() => handleReset(duration)}
           buttonStyle={clsx(
             buttonStyle,
-            isRunning || isPaused ? "block" : "hidden"
+            isRunning || isPaused ? "block" : "hidden",
+            isExpired ? "hidden" : ""
           )}
         />
+
+        {activeState === "Work" ? (
+          <>
+            <Button
+              title="Restart Focus"
+              onClick={onRestartFocus}
+              buttonStyle={clsx(
+                buttonStyle,
+                !isRunning && isExpired ? "block" : "hidden"
+              )}
+            />
+            <Button
+              title="Short"
+              onClick={changeToShortBreak}
+              buttonStyle={clsx(buttonStyle, !isExpired ? "hidden" : "block")}
+            />
+            <Button
+              title="Long"
+              onClick={changeToShortBreak}
+              buttonStyle={clsx(buttonStyle, !isExpired ? "hidden" : "block")}
+            />
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
