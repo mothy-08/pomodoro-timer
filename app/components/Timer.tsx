@@ -11,8 +11,8 @@ export default function Timer({
   activeState,
   isExpired,
   onRestartFocus,
-  changeToShortBreak,
-  changeToLongBreak,
+  onRestartShortBreak,
+  onRestartLongBreak,
 }: {
   expiryTimestamp: Date;
   autoStart?: boolean;
@@ -21,8 +21,8 @@ export default function Timer({
   activeState: string;
   isExpired: boolean;
   onRestartFocus: () => void;
-  changeToShortBreak: () => void;
-  changeToLongBreak: () => void;
+  onRestartShortBreak: () => void;
+  onRestartLongBreak: () => void;
 }) {
   const { seconds, minutes, isRunning, start, pause, resume, restart } =
     useTimer({
@@ -106,7 +106,7 @@ export default function Timer({
           )}
         />
 
-        {activeState === "Work" ? (
+        {activeState === "work" ? (
           <>
             <Button
               title="Restart Focus"
@@ -118,12 +118,44 @@ export default function Timer({
             />
             <Button
               title="Short"
-              onClick={changeToShortBreak}
+              onClick={onRestartShortBreak}
               buttonStyle={clsx(buttonStyle, !isExpired ? "hidden" : "block")}
             />
             <Button
               title="Long"
-              onClick={changeToShortBreak}
+              onClick={onRestartLongBreak}
+              buttonStyle={clsx(buttonStyle, !isExpired ? "hidden" : "block")}
+            />
+          </>
+        ) : activeState === "shortBreak" ? (
+          <>
+            <Button
+              title="Start Focus"
+              onClick={onRestartFocus}
+              buttonStyle={clsx(
+                buttonStyle,
+                !isRunning && isExpired ? "block" : "hidden"
+              )}
+            />
+            <Button
+              title="Another short break"
+              onClick={onRestartShortBreak}
+              buttonStyle={clsx(buttonStyle, !isExpired ? "hidden" : "block")}
+            />
+          </>
+        ) : activeState === "longBreak" ? (
+          <>
+            <Button
+              title="Start Focus"
+              onClick={onRestartFocus}
+              buttonStyle={clsx(
+                buttonStyle,
+                !isRunning && isExpired ? "block" : "hidden"
+              )}
+            />
+            <Button
+              title="Another long break"
+              onClick={onRestartLongBreak}
               buttonStyle={clsx(buttonStyle, !isExpired ? "hidden" : "block")}
             />
           </>
