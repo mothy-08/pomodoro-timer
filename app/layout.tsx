@@ -8,7 +8,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Pomdoro Timer",
+  title: "Pomodoro Timer",
   description: "A simple Pomodoro Timer inspired by roadmap.sh.",
 };
 

@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 export default function Button({
   title,
-  isActive,
+  isActive = true,
   onClick,
   buttonStyle,
 }: {
@@ -17,8 +17,10 @@ export default function Button({
     <button
       onClick={onClick}
       className={clsx(
-        "py-1 px-3 text-clr-btn rounded-md hover:bg-bg-btn-hover hover:text-clr-btn-hover transition-all",
-        isActive ? "bg-bg-btn-hover text-clr-btn-hover" : "",
+        "rounded-md px-3 py-2 transition-colors",
+        isActive
+          ? "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-100"
+          : "text-zinc-700 hover:bg-zinc-800 hover:text-zinc-400",
         buttonStyle
       )}
     >
