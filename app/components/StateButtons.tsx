@@ -8,11 +8,11 @@ interface StateButtonsProps {
   changeState: (key: TimerStateKey) => void;
 }
 
-const StateButtons: React.FC<StateButtonsProps> = ({
+export default function StateButtons({
   stateDurations,
   currentState,
   changeState,
-}) => {
+}: StateButtonsProps) {
   return (
     <div className="flex gap-2">
       {Object.keys(stateDurations).map((key) => (
@@ -25,6 +25,4 @@ const StateButtons: React.FC<StateButtonsProps> = ({
       ))}
     </div>
   );
-};
-
-export default StateButtons;
+}

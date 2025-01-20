@@ -4,14 +4,12 @@ interface TotalWorkSessionsProps {
   totalWorkSessions: number;
 }
 
-const TotalWorkSessions: React.FC<TotalWorkSessionsProps> = ({
+export default function TotalWorkSessions({
   totalWorkSessions,
-}) => {
+}: TotalWorkSessionsProps) {
   return (
     <div className="text-zinc-400 bg-zinc-800 py-2 px-4 rounded-lg">
       <p>Total work sessions: {totalWorkSessions}</p>
     </div>
   );
-};
-
-export default TotalWorkSessions;
+}
