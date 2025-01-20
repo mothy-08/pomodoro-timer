@@ -12,7 +12,7 @@ export default function TimerSettings() {
           placeholder="Duration in minutes"
           type="text"
           className="mb-3 w-full rounded-md border-none bg-zinc-800 p-2 text-left font-normal placeholder-zinc-600 outline-none"
-          value="1"
+          defaultValue="1"
         ></input>
         <div className="flex flex-row gap-4">
           <div>
@@ -21,7 +21,7 @@ export default function TimerSettings() {
               placeholder="Minutes"
               type="text"
               className="mb-3 w-full rounded-md border-none bg-zinc-800 p-2 text-left font-normal placeholder-zinc-600 outline-none"
-              value="5"
+              defaultValue="5"
             ></input>
           </div>
           <div>
@@ -30,7 +30,7 @@ export default function TimerSettings() {
               placeholder="Minutes"
               type="text"
               className="mb-5 w-full rounded-md border-none bg-zinc-800 p-2 text-left font-normal placeholder-zinc-600 outline-none"
-              value="15"
+              defaultValue="15"
             ></input>
           </div>
         </div>
