@@ -127,9 +127,11 @@ export default function Timer({
                 : "Another long break"
             }
             onClick={() => {
-              currentState === "shortBreak"
-                ? restartShortBreakTimer()
-                : restartLongBreakTimer();
+              if (currentState ===" shortBreak") {
+                restartShortBreakTimer();
+              } else {
+                restartLongBreakTimer
+              }
             }}
             buttonStyle={clsx(!isTimerExpired ? "hidden" : "block")}
           />

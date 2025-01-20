@@ -4,7 +4,7 @@ import React from "react";
 import Button from "./components/Button";
 import Timer from "./components/Timer";
 import TimerSettings from "./components/TimerSettings";
-import useTimerState, { TimerStateKey } from "./hooks/useTimerState";
+import useTimerState from "./hooks/useTimerState";
 import StateButtons from "./components/StateButtons";
 import TotalWorkSessions from "./components/TotalWorkSessions";
 
