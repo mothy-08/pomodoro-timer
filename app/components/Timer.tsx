@@ -12,6 +12,8 @@ export default function Timer({
   restartWorkTimer,
   restartShortBreakTimer,
   restartLongBreakTimer,
+  autoStart,
+  totalWorkSessions,
 }: {
   timerExpiry: Date;
   playTimerSound: () => void;
@@ -21,6 +23,8 @@ export default function Timer({
   restartWorkTimer: () => void;
   restartShortBreakTimer: () => void;
   restartLongBreakTimer: () => void;
+  autoStart: boolean;
+  totalWorkSessions: number;
 }) {
   const {
     totalSeconds,
@@ -37,6 +41,7 @@ export default function Timer({
       console.warn("onExpire called");
       playTimerSound();
     },
+    autoStart: autoStart,
   });
 
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
@@ -63,8 +68,8 @@ export default function Timer({
   };
 
   React.useEffect(() => {
-    restart(timerExpiry, false);
-  }, [timerExpiry, restart]);
+    restart(timerExpiry, autoStart);
+  }, [restart, timerExpiry, autoStart]);
 
   React.useEffect(() => {
     if (isTimerExpired) {
@@ -98,11 +103,13 @@ export default function Timer({
               !isRunning && isTimerExpired ? "block" : "hidden"
             )}
           />
-          <Button
-            title="Short"
-            onClick={restartShortBreakTimer}
-            buttonStyle={clsx(!isTimerExpired ? "hidden" : "block")}
-          />
+          {totalWorkSessions % 4 !== 0 && (
+            <Button
+              title="Short"
+              onClick={restartShortBreakTimer}
+              buttonStyle={clsx(!isTimerExpired ? "hidden" : "block")}
+            />
+          )}
           <Button
             title="Long"
             onClick={restartLongBreakTimer}
@@ -138,7 +145,6 @@ export default function Timer({
         </>
       );
     }
-    return null;
   };
 
   return (

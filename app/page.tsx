@@ -17,7 +17,8 @@ export default function Home() {
     totalWorkSessions,
     changeState,
     playTimerSound,
-    calculateDuration,
+    autoStart,
+    duration,
   } = useTimerState();
 
   const [showTimerSettings, setShowTimerSettings] =
@@ -35,11 +36,13 @@ export default function Home() {
         timerExpiry={timerExpiry}
         playTimerSound={() => playTimerSound(currentState)}
         isTimerExpired={isTimerExpired}
-        duration={calculateDuration}
+        duration={duration}
         currentState={currentState}
         restartWorkTimer={() => changeState("work")}
         restartShortBreakTimer={() => changeState("shortBreak")}
         restartLongBreakTimer={() => changeState("longBreak")}
+        autoStart={autoStart}
+        totalWorkSessions={totalWorkSessions}
       />
 
       <div className="absolute top-4 left-4 flex flex-col gap-2">

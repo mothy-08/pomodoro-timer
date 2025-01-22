@@ -10,8 +10,8 @@ type TimerStateDetails = {
 
 const stateDurations: Record<TimerStateKey, TimerStateDetails> = {
   work: { duration: 5, label: "Work" },
-  shortBreak: { duration: 300, label: "Short Break" },
-  longBreak: { duration: 900, label: "Long Break" },
+  shortBreak: { duration: 4, label: "Short Break" },
+  longBreak: { duration: 3, label: "Long Break" },
 };
 
 export default function useTimerState() {
@@ -24,21 +24,22 @@ export default function useTimerState() {
   const [isTimerExpired, setIsTimerExpired] = React.useState<boolean>(false);
   const [play, { stop }] = useSound("/timer.mp3");
   const [totalWorkSessions, setTotalWorkSessions] = React.useState<number>(0);
+  const [autoStart, setAutoStart] = React.useState<boolean>(false);
+
+  const duration = stateDurations[currentState].duration;
 
   const changeState = (type: TimerStateKey) => {
-    if (isTimerExpired === true) {
+    if (isTimerExpired) {
       stop();
       setIsTimerExpired(false);
-    }
+      setAutoStart(true);
+    } else setAutoStart(false);
+
     setCurrentState(type);
     setTimerExpiry(
       new Date(new Date().getTime() + stateDurations[type].duration * 1000)
     );
   };
-
-  const calculateDuration = Math.ceil(
-    (timerExpiry.getTime() - new Date().getTime()) / 1000
-  );
 
   const playTimerSound = (type: TimerStateKey) => {
     if (type == "work") setTotalWorkSessions(totalWorkSessions + 1);
@@ -54,6 +55,7 @@ export default function useTimerState() {
     totalWorkSessions,
     changeState,
     playTimerSound,
-    calculateDuration,
+    autoStart,
+    duration,
   };
 }
