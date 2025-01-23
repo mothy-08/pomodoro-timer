@@ -1,4 +1,5 @@
 import React from "react";
+import Input from "./Input";
 
 export default function TimerSettings({ onClick }: { onClick: () => void }) {
   return (
@@ -11,31 +12,16 @@ export default function TimerSettings({ onClick }: { onClick: () => void }) {
         onClick={(e) => e.stopPropagation()}
         className="mx-auto flex max-w-[300px] flex-col rounded-lg border border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-400"
       >
-        <p>Pomodoro duration {"(min)"}</p>
-        <input
-          placeholder="Duration in minutes"
-          type="text"
-          className="mb-3 w-full rounded-md border-none bg-zinc-800 p-2 text-left font-normal placeholder-zinc-600 outline-none"
-          defaultValue="1"
-        ></input>
+        <label htmlFor="pomdoro-input">Pomodoro duration {"(min)"}</label>
+        <Input id="pomodoro-input" defaultValue="25" />
         <div className="flex flex-row gap-4">
           <div>
-            <p className="mb-2">Long break (min)</p>
-            <input
-              placeholder="Minutes"
-              type="text"
-              className="mb-3 w-full rounded-md border-none bg-zinc-800 p-2 text-left font-normal placeholder-zinc-600 outline-none"
-              defaultValue="5"
-            ></input>
+            <label htmlFor="short-break-input">Short break {"(min)"}</label>
+            <Input id="short-break-input" defaultValue="5" />
           </div>
           <div>
-            <p className="mb-2">Long break (min)</p>
-            <input
-              placeholder="Minutes"
-              type="text"
-              className="mb-5 w-full rounded-md border-none bg-zinc-800 p-2 text-left font-normal placeholder-zinc-600 outline-none"
-              defaultValue="15"
-            ></input>
+            <label htmlFor="long-break-input">Long break {"(min)"}</label>
+            <Input id="long-break-input" defaultValue="15" />
           </div>
         </div>
         <button

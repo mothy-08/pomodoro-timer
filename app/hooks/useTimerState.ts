@@ -1,24 +1,27 @@
 import React from "react";
 import useSound from "use-sound";
 
+export const MILLISECONDS_MULTIPLIER: number = 60000;
+
 export type TimerStateKey = "work" | "shortBreak" | "longBreak";
 
 type TimerStateDetails = {
-  duration: number;
+  durationInMinutes: number;
   label: string;
 };
 
 const stateDurations: Record<TimerStateKey, TimerStateDetails> = {
-  work: { duration: 5, label: "Work" },
-  shortBreak: { duration: 4, label: "Short Break" },
-  longBreak: { duration: 3, label: "Long Break" },
+  work: { durationInMinutes: 25, label: "Work" },
+  shortBreak: { durationInMinutes: 5, label: "Short Break" },
+  longBreak: { durationInMinutes: 15, label: "Long Break" },
 };
 
 export default function useTimerState() {
   const [currentState, setCurrentState] = React.useState<TimerStateKey>("work");
   const [timerExpiry, setTimerExpiry] = React.useState<Date>(
     new Date(
-      new Date().getTime() + stateDurations[currentState].duration * 1000
+      new Date().getTime() +
+        stateDurations[currentState].durationInMinutes * MILLISECONDS_MULTIPLIER
     )
   );
   const [isTimerExpired, setIsTimerExpired] = React.useState<boolean>(false);
@@ -26,7 +29,7 @@ export default function useTimerState() {
   const [totalWorkSessions, setTotalWorkSessions] = React.useState<number>(0);
   const [autoStart, setAutoStart] = React.useState<boolean>(false);
 
-  const duration = stateDurations[currentState].duration;
+  const duration = stateDurations[currentState].durationInMinutes;
 
   const changeState = (type: TimerStateKey) => {
     if (isTimerExpired) {
@@ -37,7 +40,10 @@ export default function useTimerState() {
 
     setCurrentState(type);
     setTimerExpiry(
-      new Date(new Date().getTime() + stateDurations[type].duration * 1000)
+      new Date(
+        new Date().getTime() +
+          stateDurations[type].durationInMinutes * MILLISECONDS_MULTIPLIER
+      )
     );
   };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { useTimer } from "react-timer-hook";
 import Button from "./Button";
 import clsx from "clsx";
+import { MILLISECONDS_MULTIPLIER } from "../hooks/useTimerState";
 
 export default function Timer({
   timerExpiry,
@@ -58,14 +59,18 @@ export default function Timer({
   };
 
   const resetTimer = (duration: number, autoStart: boolean) => {
-    const time = new Date(new Date().getTime() + duration * 1000);
+    const time = new Date(
+      new Date().getTime() + duration * MILLISECONDS_MULTIPLIER
+    );
     restart(time, autoStart);
     if (isPaused) setIsPaused(false);
   };
 
   const calculateProgressBarPercentage = () => {
-    return String(100 - (totalSeconds / duration) * 100) + "%";
+    return String(100 - (totalSeconds / (duration * 60)) * 100) + "%";
   };
+
+  console.log(totalSeconds, duration, calculateProgressBarPercentage());
 
   React.useEffect(() => {
     restart(timerExpiry, autoStart);
