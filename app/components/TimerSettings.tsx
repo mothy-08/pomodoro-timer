@@ -1,10 +1,14 @@
 import React from "react";
 
-export default function TimerSettings() {
+export default function TimerSettings({ onClick }: { onClick: () => void }) {
   return (
-    <div className="fixed inset-0 z-[9999] h-full flex items-center justify-center overflow-y-auto overflow-x-hidden bg-zinc-800/90">
+    <div
+      onClick={onClick}
+      className="fixed inset-0 z-[9999] h-full flex items-center justify-center overflow-y-auto overflow-x-hidden bg-zinc-800/90"
+    >
       <form
         action=""
+        onClick={(e) => e.stopPropagation()}
         className="mx-auto flex max-w-[300px] flex-col rounded-lg border border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-400"
       >
         <p>Pomodoro duration {"(min)"}</p>

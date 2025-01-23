@@ -55,7 +55,9 @@ export default function Home() {
         />
       </div>
 
-      {showTimerSettings && <TimerSettings />}
+      {showTimerSettings && (
+        <TimerSettings onClick={() => setShowTimerSettings(false)} />
+      )}
     </main>
   );
 }
