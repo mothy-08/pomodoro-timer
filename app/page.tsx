@@ -19,6 +19,7 @@ export default function Home() {
     playTimerSound,
     autoStart,
     duration,
+    updateDurations,
   } = useTimerState();
 
   const [showTimerSettings, setShowTimerSettings] =
@@ -50,13 +51,16 @@ export default function Home() {
 
         <Button
           title="Configure timer"
-          buttonStyle="rounded-lg w-full"
+          className="rounded-lg w-full"
           onClick={() => setShowTimerSettings(true)}
         />
       </div>
 
       {showTimerSettings && (
-        <TimerSettings onClick={() => setShowTimerSettings(false)} />
+        <TimerSettings
+          onClick={() => setShowTimerSettings(false)}
+          updateDurations={updateDurations}
+        />
       )}
     </main>
   );

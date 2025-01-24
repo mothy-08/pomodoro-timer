@@ -53,6 +53,20 @@ export default function useTimerState() {
     setIsTimerExpired(true);
   };
 
+  const updateDurations = (newDurations: Record<TimerStateKey, number>) => {
+    Object.keys(newDurations).forEach((key) => {
+      stateDurations[key as TimerStateKey].durationInMinutes =
+        newDurations[key as TimerStateKey];
+    });
+    setTimerExpiry(
+      new Date(
+        new Date().getTime() +
+          stateDurations[currentState].durationInMinutes *
+            MILLISECONDS_MULTIPLIER
+      )
+    );
+  };
+
   return {
     stateDurations,
     currentState,
@@ -63,5 +77,6 @@ export default function useTimerState() {
     playTimerSound,
     autoStart,
     duration,
+    updateDurations,
   };
 }

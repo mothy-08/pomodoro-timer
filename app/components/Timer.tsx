@@ -70,8 +70,6 @@ export default function Timer({
     return String(100 - (totalSeconds / (duration * 60)) * 100) + "%";
   };
 
-  console.log(totalSeconds, duration, calculateProgressBarPercentage());
-
   React.useEffect(() => {
     restart(timerExpiry, autoStart);
   }, [restart, timerExpiry, autoStart]);
@@ -104,21 +102,19 @@ export default function Timer({
           <Button
             title="Restart Focus"
             onClick={restartWorkTimer}
-            buttonStyle={clsx(
-              !isRunning && isTimerExpired ? "block" : "hidden"
-            )}
+            className={clsx(!isRunning && isTimerExpired ? "block" : "hidden")}
           />
           {totalWorkSessions % 4 !== 0 && (
             <Button
               title="Short"
               onClick={restartShortBreakTimer}
-              buttonStyle={clsx(!isTimerExpired ? "hidden" : "block")}
+              className={clsx(!isTimerExpired ? "hidden" : "block")}
             />
           )}
           <Button
             title="Long"
             onClick={restartLongBreakTimer}
-            buttonStyle={clsx(!isTimerExpired ? "hidden" : "block")}
+            className={clsx(!isTimerExpired ? "hidden" : "block")}
           />
         </>
       );
@@ -128,9 +124,7 @@ export default function Timer({
           <Button
             title="Start Focus"
             onClick={restartWorkTimer}
-            buttonStyle={clsx(
-              !isRunning && isTimerExpired ? "block" : "hidden"
-            )}
+            className={clsx(!isRunning && isTimerExpired ? "block" : "hidden")}
           />
           <Button
             title={
@@ -145,7 +139,7 @@ export default function Timer({
                 restartLongBreakTimer();
               }
             }}
-            buttonStyle={clsx(!isTimerExpired ? "hidden" : "block")}
+            className={clsx(!isTimerExpired ? "hidden" : "block")}
           />
         </>
       );
@@ -171,7 +165,7 @@ export default function Timer({
         <Button
           title="Start"
           onClick={start}
-          buttonStyle={clsx(
+          className={clsx(
             isRunning || isPaused ? "hidden" : "",
             isTimerExpired ? "hidden" : ""
           )}
@@ -179,7 +173,7 @@ export default function Timer({
         <Button
           title="Pause"
           onClick={pauseTimer}
-          buttonStyle={clsx(
+          className={clsx(
             isRunning ? "block" : "hidden",
             isTimerExpired ? "hidden" : ""
           )}
@@ -187,7 +181,7 @@ export default function Timer({
         <Button
           title="Resume"
           onClick={resumeTimer}
-          buttonStyle={clsx(
+          className={clsx(
             !isRunning && isPaused ? "block" : "hidden",
             isTimerExpired ? "hidden" : ""
           )}
@@ -195,7 +189,7 @@ export default function Timer({
         <Button
           title="Reset"
           onClick={() => resetTimer(duration, false)}
-          buttonStyle={clsx(
+          className={clsx(
             isRunning || isPaused ? "block" : "hidden",
             isTimerExpired ? "hidden" : ""
           )}

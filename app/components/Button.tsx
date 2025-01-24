@@ -2,26 +2,26 @@
 
 import clsx from "clsx";
 
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  title: string;
+  isActive?: boolean;
+}
+
 export default function Button({
   title,
   isActive = true,
-  onClick,
-  buttonStyle,
-}: {
-  title: string;
-  isActive?: boolean;
-  onClick?: () => void;
-  buttonStyle?: string;
-}) {
+  className,
+  ...rest
+}: ButtonProps) {
   return (
     <button
-      onClick={onClick}
+      {...rest}
       className={clsx(
         "rounded-md px-3 py-2 transition-colors",
         isActive
           ? "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-100"
           : "text-zinc-700 hover:bg-zinc-800 hover:text-zinc-400",
-        buttonStyle
+        className
       )}
     >
       {title}
