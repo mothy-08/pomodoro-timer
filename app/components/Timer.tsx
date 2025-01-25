@@ -3,6 +3,8 @@ import { useTimer } from "react-timer-hook";
 import Button from "./Button";
 import clsx from "clsx";
 import { MILLISECONDS_MULTIPLIER } from "../hooks/useTimerState";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default function Timer({
   timerExpiry,
@@ -67,7 +69,7 @@ export default function Timer({
   };
 
   const calculateProgressBarPercentage = () => {
-    return String(100 - (totalSeconds / (duration * 60)) * 100) + "%";
+    return (totalSeconds / (duration * 60)) * 100;
   };
 
   React.useEffect(() => {
@@ -148,17 +150,24 @@ export default function Timer({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <div className="text-8xl font-bold space-x-4">
-        <span>{formatTimeToString(minutes)}</span>
-        <span>:</span>
-        <span>{formatTimeToString(seconds)}</span>
-      </div>
-
-      <div className="mx-auto my-1 h-1 w-full overflow-hidden rounded-lg bg-zinc-800">
-        <div
-          className="h-full w-full rounded-lg bg-zinc-500 transition-all"
-          style={{ width: calculateProgressBarPercentage() }}
-        ></div>
+      <div className="w-[300px] relative aspect-square flex justify-center items-center">
+        <div className="absolute text-7xl font-bold space-x-4 text-zinc-100">
+          <span>{formatTimeToString(minutes)}</span>
+          <span>:</span>
+          <span>{formatTimeToString(seconds)}</span>
+        </div>
+        <CircularProgressbar
+          value={calculateProgressBarPercentage()}
+          strokeWidth={4}
+          styles={{
+            path: {
+              stroke: "rgb(113, 113, 112)",
+            },
+            trail: {
+              stroke: "rgb(39, 39, 42)",
+            },
+          }}
+        />
       </div>
 
       <div className="flex gap-3 justify-center items-center">

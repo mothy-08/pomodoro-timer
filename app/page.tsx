@@ -7,6 +7,7 @@ import TimerSettings from "./components/TimerSettings";
 import useTimerState from "./hooks/useTimerState";
 import StateButtons from "./components/StateButtons";
 import TotalWorkSessions from "./components/TotalWorkSessions";
+import clsx from "clsx";
 
 export default function Home() {
   const {
@@ -22,8 +23,17 @@ export default function Home() {
     updateDurations,
   } = useTimerState();
 
-  const [showTimerSettings, setShowTimerSettings] =
-    React.useState<boolean>(false);
+  const [visible, setVisible] = React.useState<string>("");
+
+  const isTimerSettingsVisible = visible === "showTimerSettings";
+  const isSuccessful = visible === "showSuccessful";
+
+  const showSuccessful = () => {
+    setVisible("showSuccessful");
+    setTimeout(() => {
+      setVisible("");
+    }, 2000);
+  };
 
   return (
     <main className="h-screen flex flex-col justify-center items-center gap-6">
@@ -52,16 +62,28 @@ export default function Home() {
         <Button
           title="Configure timer"
           className="rounded-lg w-full"
-          onClick={() => setShowTimerSettings(true)}
+          onClick={() => setVisible("showTimerSettings")}
         />
       </div>
 
-      {showTimerSettings && (
+      {isTimerSettingsVisible && (
         <TimerSettings
-          onClick={() => setShowTimerSettings(false)}
+          onClick={() => setVisible("")}
           updateDurations={updateDurations}
+          showSuccessful={showSuccessful}
         />
       )}
+
+      <div
+        className={clsx(
+          "w-[300px] absolute bottom-0 flex items-center justify-center bg-zinc-200 py-2 text-zinc-800 font-bold rounded-lg transition-all duration-300",
+          isSuccessful
+            ? "-translate-y-5 opacity-100 visible"
+            : "translate-y-full opacity-0 invisibile"
+        )}
+      >
+        Settings updated successfully!
+      </div>
     </main>
   );
 }

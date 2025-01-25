@@ -6,9 +6,11 @@ import Button from "./Button";
 export default function TimerSettings({
   onClick,
   updateDurations,
+  showSuccessful,
 }: {
   onClick: () => void;
   updateDurations: (newDurations: Record<TimerStateKey, number>) => void;
+  showSuccessful: () => void;
 }) {
   const [values, setValues] = React.useState({
     work: "25",
@@ -45,13 +47,13 @@ export default function TimerSettings({
       shortBreak: parseInt(values.shortBreak),
       longBreak: parseInt(values.longBreak),
     });
-    onClick();
+    showSuccessful();
   };
 
   return (
     <div
       onClick={onClick}
-      className="fixed inset-0 z-[9999] h-full flex items-center justify-center overflow-y-auto overflow-x-hidden bg-zinc-800/90"
+      className="fixed inset-0 z-[9999] h-full flex items-center justify-center overflow-hidden bg-zinc-800/90"
     >
       <form
         action=""
