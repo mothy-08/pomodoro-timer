@@ -86,7 +86,7 @@ export default function Timer({
       )}:${formatTimeToString(seconds)}`;
       const stateLabel =
         currentState === "work"
-          ? "Focus"
+          ? "Work"
           : currentState === "shortBreak"
             ? "Short Break"
             : "Long Break";
