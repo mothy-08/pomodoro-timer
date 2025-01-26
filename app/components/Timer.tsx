@@ -3,7 +3,9 @@ import { useTimer } from "react-timer-hook";
 import Button from "./Button";
 import clsx from "clsx";
 import { MILLISECONDS_MULTIPLIER } from "../hooks/useTimerState";
-import { CircularProgressbar } from "react-circular-progressbar";
+import TimerDisplay from "./TimerDisplay";
+import ProgressBar from "./ProgressBar";
+import ButtonGroup from "./ButtonGroup";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function Timer({
@@ -97,114 +99,35 @@ export default function Timer({
     };
   }, [minutes, seconds, isTimerExpired, currentState]);
 
-  const renderStateButtons = () => {
-    if (currentState === "work") {
-      return (
-        <>
-          <Button
-            title="Restart Focus"
-            onClick={restartWorkTimer}
-            className={clsx(!isRunning && isTimerExpired ? "block" : "hidden")}
-          />
-          {totalWorkSessions % 4 !== 0 && (
-            <Button
-              title="Short"
-              onClick={restartShortBreakTimer}
-              className={clsx(!isTimerExpired ? "hidden" : "block")}
-            />
-          )}
-          <Button
-            title="Long"
-            onClick={restartLongBreakTimer}
-            className={clsx(!isTimerExpired ? "hidden" : "block")}
-          />
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Button
-            title="Start Focus"
-            onClick={restartWorkTimer}
-            className={clsx(!isRunning && isTimerExpired ? "block" : "hidden")}
-          />
-          <Button
-            title={
-              currentState === "shortBreak"
-                ? "Another short break"
-                : "Another long break"
-            }
-            onClick={() => {
-              if (currentState === "shortBreak") {
-                restartShortBreakTimer();
-              } else {
-                restartLongBreakTimer();
-              }
-            }}
-            className={clsx(!isTimerExpired ? "hidden" : "block")}
-          />
-        </>
-      );
-    }
-  };
+  const progressBarColors: string =
+    currentState === "work"
+      ? "#f5ca93"
+      : currentState === "shortBreak"
+      ? "#bf93f5"
+      : "#93f5ca";
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <div className="w-[300px] relative aspect-square flex justify-center items-center">
-        <div className="absolute text-7xl font-bold space-x-4 text-zinc-100">
-          <span>{formatTimeToString(minutes)}</span>
-          <span>:</span>
-          <span>{formatTimeToString(seconds)}</span>
-        </div>
-        <CircularProgressbar
-          value={calculateProgressBarPercentage()}
-          strokeWidth={4}
-          styles={{
-            path: {
-              stroke: "rgb(113, 113, 112)",
-            },
-            trail: {
-              stroke: "rgb(39, 39, 42)",
-            },
-          }}
-        />
-      </div>
-
-      <div className="flex gap-3 justify-center items-center">
-        <Button
-          title="Start"
-          onClick={start}
-          className={clsx(
-            isRunning || isPaused ? "hidden" : "",
-            isTimerExpired ? "hidden" : ""
-          )}
-        />
-        <Button
-          title="Pause"
-          onClick={pauseTimer}
-          className={clsx(
-            isRunning ? "block" : "hidden",
-            isTimerExpired ? "hidden" : ""
-          )}
-        />
-        <Button
-          title="Resume"
-          onClick={resumeTimer}
-          className={clsx(
-            !isRunning && isPaused ? "block" : "hidden",
-            isTimerExpired ? "hidden" : ""
-          )}
-        />
-        <Button
-          title="Reset"
-          onClick={() => resetTimer(duration, false)}
-          className={clsx(
-            isRunning || isPaused ? "block" : "hidden",
-            isTimerExpired ? "hidden" : ""
-          )}
-        />
-        {renderStateButtons()}
-      </div>
+      <TimerDisplay
+        minutes={minutes}
+        seconds={seconds}
+        percentage={calculateProgressBarPercentage()}
+        color={progressBarColors}
+      />
+      <ButtonGroup
+        isRunning={isRunning}
+        isPaused={isPaused}
+        isTimerExpired={isTimerExpired}
+        start={start}
+        pause={pauseTimer}
+        resume={resumeTimer}
+        reset={() => resetTimer(duration, false)}
+        currentState={currentState}
+        restartWorkTimer={restartWorkTimer}
+        restartShortBreakTimer={restartShortBreakTimer}
+        restartLongBreakTimer={restartLongBreakTimer}
+        totalWorkSessions={totalWorkSessions}
+      />
     </div>
   );
 }

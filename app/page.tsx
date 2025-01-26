@@ -32,11 +32,28 @@ export default function Home() {
     setVisible("showSuccessful");
     setTimeout(() => {
       setVisible("");
-    }, 2000);
+    }, 3000);
   };
 
   return (
     <main className="h-screen flex flex-col justify-center items-center gap-6">
+      <div className="absolute top-4 left-4 flex flex-col gap-2">
+        <TotalWorkSessions totalWorkSessions={totalWorkSessions} />
+
+        <Button
+          title="Configure timer"
+          className="rounded-lg w-full"
+          onClick={() => setVisible("showTimerSettings")}
+        />
+      </div>
+
+      {isTimerSettingsVisible && (
+        <TimerSettings
+          onClick={() => setVisible("")}
+          updateDurations={updateDurations}
+          showSuccessful={showSuccessful}
+        />
+      )}
       <StateButtons
         stateDurations={stateDurations}
         currentState={currentState}
@@ -55,24 +72,6 @@ export default function Home() {
         autoStart={autoStart}
         totalWorkSessions={totalWorkSessions}
       />
-
-      <div className="absolute top-4 left-4 flex flex-col gap-2">
-        <TotalWorkSessions totalWorkSessions={totalWorkSessions} />
-
-        <Button
-          title="Configure timer"
-          className="rounded-lg w-full"
-          onClick={() => setVisible("showTimerSettings")}
-        />
-      </div>
-
-      {isTimerSettingsVisible && (
-        <TimerSettings
-          onClick={() => setVisible("")}
-          updateDurations={updateDurations}
-          showSuccessful={showSuccessful}
-        />
-      )}
 
       <div
         className={clsx(
