@@ -35,7 +35,7 @@ export default function Home() {
   };
 
   return (
-    <main className="h-screen flex flex-col justify-center items-center gap-6">
+    <main className="flex h-screen flex-col items-center justify-center gap-6">
       <StateButtons
         stateDurations={stateDurations}
         currentState={currentState}
@@ -65,10 +65,10 @@ export default function Home() {
       )}
       <div
         className={clsx(
-          "absolute bottom-0 flex items-center justify-center text-green-400 gap-2 font-bold rounded-lg transition-all duration-300",
+          "absolute bottom-0 flex items-center justify-center gap-2 rounded-lg font-bold text-green-400 transition-all duration-300",
           isSuccessful
-            ? "-translate-y-5 opacity-100 visible"
-            : "translate-y-full opacity-0 invisibile"
+            ? "visible -translate-y-5 opacity-100"
+            : "invisibile translate-y-full opacity-0",
         )}
       >
         <span className="material-symbols-outlined">check_circle</span>

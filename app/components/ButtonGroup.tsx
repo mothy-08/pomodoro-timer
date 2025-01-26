@@ -83,13 +83,13 @@ export default function ButtonGroup({
   const hideOnTimerExpire: string = isTimerExpired ? "hidden" : "";
 
   return (
-    <div className="flex gap-3 justify-center items-center">
+    <div className="flex items-center justify-center gap-3">
       <Button
         title="Start"
         onClick={start}
         className={clsx(
           isRunning || isPaused ? "hidden" : "",
-          hideOnTimerExpire
+          hideOnTimerExpire,
         )}
       />
       <Button
@@ -102,7 +102,7 @@ export default function ButtonGroup({
         onClick={resume}
         className={clsx(
           !isRunning && isPaused ? "block" : "hidden",
-          hideOnTimerExpire
+          hideOnTimerExpire,
         )}
       />
       <Button
@@ -110,7 +110,7 @@ export default function ButtonGroup({
         onClick={reset}
         className={clsx(
           isRunning || isPaused ? "block" : "hidden",
-          hideOnTimerExpire
+          hideOnTimerExpire,
         )}
       />
       {renderStateButtons()}

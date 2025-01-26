@@ -36,7 +36,7 @@ export default function TimerSettings({
   };
 
   const hasInvalidValue = Object.values(values).some(
-    (value) => Number(value) > 59
+    (value) => Number(value) > 59,
   );
 
   const configureTimer = (event: React.FormEvent<HTMLFormElement>) => {
@@ -53,13 +53,13 @@ export default function TimerSettings({
   return (
     <div
       onClick={onClick}
-      className="fixed inset-0 z-[9999] h-full flex items-center justify-center overflow-hidden bg-zinc-800/90"
+      className="fixed inset-0 z-[9999] flex h-full items-center justify-center overflow-hidden bg-zinc-800/90"
     >
       <form
         action=""
         onClick={(event) => event.stopPropagation()}
         onSubmit={configureTimer}
-        className="mx-auto flex max-w-[300px] flex-col rounded-lg border border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-400 gap-3"
+        className="mx-auto flex max-w-[300px] flex-col gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-400"
       >
         <div>
           <Input
@@ -95,13 +95,13 @@ export default function TimerSettings({
         </div>
 
         {hasInvalidValue && (
-          <p className="text-red-500 -mb-2">Values cannot exceed 59 minutes.</p>
+          <p className="-mb-2 text-red-500">Values cannot exceed 59 minutes.</p>
         )}
 
         <Button
           type="submit"
           title="Update Setings"
-          className="w-full mt-1 disabled:opacity-50 disabled:pointer-events-none"
+          className="mt-1 w-full disabled:pointer-events-none disabled:opacity-50"
           disabled={hasInvalidValue}
         />
       </form>

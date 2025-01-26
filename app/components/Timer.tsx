@@ -63,7 +63,7 @@ export default function Timer({
 
   const resetTimer = (duration: number, autoStart: boolean) => {
     const time = new Date(
-      new Date().getTime() + duration * MILLISECONDS_MULTIPLIER
+      new Date().getTime() + duration * MILLISECONDS_MULTIPLIER,
     );
     restart(time, autoStart);
     if (isPaused) setIsPaused(false);
@@ -82,14 +82,14 @@ export default function Timer({
       document.title = "Time's Up!";
     } else {
       const formattedTime = `${formatTimeToString(
-        minutes
+        minutes,
       )}:${formatTimeToString(seconds)}`;
       const stateLabel =
         currentState === "work"
           ? "Focus"
           : currentState === "shortBreak"
-          ? "Short Break"
-          : "Long Break";
+            ? "Short Break"
+            : "Long Break";
       document.title = `${formattedTime} - ${stateLabel}`;
     }
 
@@ -102,8 +102,8 @@ export default function Timer({
     currentState === "work"
       ? "#f5ca93"
       : currentState === "shortBreak"
-      ? "#bf93f5"
-      : "#93f5ca";
+        ? "#bf93f5"
+        : "#93f5ca";
 
   return (
     <div className="flex flex-col items-center gap-6">
