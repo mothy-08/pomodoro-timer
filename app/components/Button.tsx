@@ -1,12 +1,14 @@
 import clsx from "clsx";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  title: string;
+  title?: string;
+  children?: React.ReactNode;
   isActive?: boolean;
 }
 
 export default function Button({
   title,
+  children,
   isActive = true,
   className,
   ...rest
@@ -23,6 +25,7 @@ export default function Button({
       )}
     >
       {title}
+      {children}
     </button>
   );
 }

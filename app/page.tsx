@@ -6,7 +6,6 @@ import Timer from "./components/Timer";
 import TimerSettings from "./components/TimerSettings";
 import useTimerState from "./hooks/useTimerState";
 import StateButtons from "./components/StateButtons";
-import TotalWorkSessions from "./components/TotalWorkSessions";
 import clsx from "clsx";
 
 export default function Home() {
@@ -37,23 +36,6 @@ export default function Home() {
 
   return (
     <main className="h-screen flex flex-col justify-center items-center gap-6">
-      <div className="absolute top-4 left-4 flex flex-col gap-2">
-        <TotalWorkSessions totalWorkSessions={totalWorkSessions} />
-
-        <Button
-          title="Configure timer"
-          className="rounded-lg w-full"
-          onClick={() => setVisible("showTimerSettings")}
-        />
-      </div>
-
-      {isTimerSettingsVisible && (
-        <TimerSettings
-          onClick={() => setVisible("")}
-          updateDurations={updateDurations}
-          showSuccessful={showSuccessful}
-        />
-      )}
       <StateButtons
         stateDurations={stateDurations}
         currentState={currentState}
@@ -71,16 +53,25 @@ export default function Home() {
         restartLongBreakTimer={() => changeState("longBreak")}
         autoStart={autoStart}
         totalWorkSessions={totalWorkSessions}
+        showTimerSettings={() => setVisible("showTimerSettings")}
       />
 
+      {isTimerSettingsVisible && (
+        <TimerSettings
+          onClick={() => setVisible("")}
+          updateDurations={updateDurations}
+          showSuccessful={showSuccessful}
+        />
+      )}
       <div
         className={clsx(
-          "w-[300px] absolute bottom-0 flex items-center justify-center bg-zinc-200 py-2 text-zinc-800 font-bold rounded-lg transition-all duration-300",
+          "absolute bottom-0 flex items-center justify-center text-green-400 gap-2 font-bold rounded-lg transition-all duration-300",
           isSuccessful
             ? "-translate-y-5 opacity-100 visible"
             : "translate-y-full opacity-0 invisibile"
         )}
       >
+        <span className="material-symbols-outlined">check_circle</span>
         Settings updated successfully!
       </div>
     </main>

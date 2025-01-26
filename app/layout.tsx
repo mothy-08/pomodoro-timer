@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./globalicon.css";
 import { Roboto } from "next/font/google";
 import type { Metadata } from "next";
 

@@ -1,10 +1,7 @@
 import React from "react";
 import { useTimer } from "react-timer-hook";
-import Button from "./Button";
-import clsx from "clsx";
 import { MILLISECONDS_MULTIPLIER } from "../hooks/useTimerState";
 import TimerDisplay from "./TimerDisplay";
-import ProgressBar from "./ProgressBar";
 import ButtonGroup from "./ButtonGroup";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -19,6 +16,7 @@ export default function Timer({
   restartLongBreakTimer,
   autoStart,
   totalWorkSessions,
+  showTimerSettings,
 }: {
   timerExpiry: Date;
   playTimerSound: () => void;
@@ -30,6 +28,7 @@ export default function Timer({
   restartLongBreakTimer: () => void;
   autoStart: boolean;
   totalWorkSessions: number;
+  showTimerSettings: () => void;
 }) {
   const {
     totalSeconds,
@@ -113,6 +112,8 @@ export default function Timer({
         seconds={seconds}
         percentage={calculateProgressBarPercentage()}
         color={progressBarColors}
+        totalWorkSessions={totalWorkSessions}
+        showTimerSettings={showTimerSettings}
       />
       <ButtonGroup
         isRunning={isRunning}
