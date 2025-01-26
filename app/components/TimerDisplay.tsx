@@ -31,7 +31,7 @@ export default function TimerDisplay({
           <span
             id="tooltip-work-session"
             role="tooltip"
-            className="invisible absolute -top-4 left-0 z-10 text-nowrap text-xs group-hover:visible"
+            className="invisible absolute -left-12 -top-4 z-10 text-nowrap text-xs group-hover:visible"
           >
             Work Sessions
           </span>

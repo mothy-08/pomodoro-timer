@@ -22,6 +22,7 @@ export default function Input({
       "ArrowDown",
       "ArrowLeft",
       "Tab",
+      "Escape",
     ];
 
     if (isNaN(Number(event.key)) && !allowedKeys.includes(event.key)) {
