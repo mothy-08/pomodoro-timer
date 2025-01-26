@@ -28,7 +28,7 @@ export default function TimerDisplay({
 
       <div className="absolute bottom-12 flex items-start justify-center gap-4 font-bold text-zinc-400">
         <div className="group relative flex items-center justify-center hover:text-zinc-100">
-          <span className="invisible absolute -left-6 -top-4 z-10 text-nowrap text-xs group-hover:visible">
+          <span className="invisible absolute -top-4 left-0 z-10 text-nowrap text-xs group-hover:visible">
             Work Sessions
           </span>
           <span className="material-symbols-outlined">hourglass</span>
@@ -36,7 +36,7 @@ export default function TimerDisplay({
         </div>
 
         <div className="group relative hover:text-zinc-100">
-          <span className="invisible absolute -left-6 -top-4 z-10 text-nowrap text-xs group-hover:visible">
+          <span className="invisible absolute -top-4 z-10 text-nowrap text-xs group-hover:visible">
             Configure Timer
           </span>
           <button

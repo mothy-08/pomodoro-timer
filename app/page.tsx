@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Button from "./components/Button";
 import Timer from "./components/Timer";
 import TimerSettings from "./components/TimerSettings";
 import useTimerState from "./hooks/useTimerState";
