@@ -5,10 +5,12 @@ import Button from "./Button";
 
 export default function TimerSettings({
   onClick,
+  onKeyDown,
   updateDurations,
   showSuccessful,
 }: {
   onClick: () => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => void;
   updateDurations: (newDurations: Record<TimerStateKey, number>) => void;
   showSuccessful: () => void;
 }) {
@@ -53,6 +55,7 @@ export default function TimerSettings({
   return (
     <div
       onClick={onClick}
+      onKeyDown={(e) => onKeyDown(e)}
       className="fixed inset-0 z-[9999] flex h-full items-center justify-center overflow-hidden bg-zinc-800/90"
     >
       <form
@@ -69,6 +72,7 @@ export default function TimerSettings({
             labelTitle="Work duration (min)"
             value={values.work}
             onChange={handleChange}
+            autoFocus
           />
         </div>
         <div className="flex flex-row gap-4">

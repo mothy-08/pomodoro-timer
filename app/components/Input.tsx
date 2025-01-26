@@ -13,7 +13,7 @@ export default function Input({
   ...rest
 }: InputProps) {
   const checkTimerInputInMinutes = (
-    event: React.KeyboardEvent<HTMLInputElement>
+    event: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     const allowedKeys = [
       "Backspace",
@@ -39,7 +39,7 @@ export default function Input({
         type="text"
         className={clsx(
           "mt-1 w-full rounded-md border-none bg-zinc-800 p-2 text-left font-normal placeholder-zinc-600 outline-none",
-          className
+          className,
         )}
         autoComplete="off"
         onKeyDown={checkTimerInputInMinutes}

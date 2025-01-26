@@ -21,8 +21,9 @@ export default function useTimerState() {
   const [timerExpiry, setTimerExpiry] = React.useState<Date>(
     new Date(
       new Date().getTime() +
-        stateDurations[currentState].durationInMinutes * MILLISECONDS_MULTIPLIER
-    )
+        stateDurations[currentState].durationInMinutes *
+          MILLISECONDS_MULTIPLIER,
+    ),
   );
   const [isTimerExpired, setIsTimerExpired] = React.useState<boolean>(false);
   const [play, { stop }] = useSound("/timer.mp3");
@@ -42,8 +43,8 @@ export default function useTimerState() {
     setTimerExpiry(
       new Date(
         new Date().getTime() +
-          stateDurations[type].durationInMinutes * MILLISECONDS_MULTIPLIER
-      )
+          stateDurations[type].durationInMinutes * MILLISECONDS_MULTIPLIER,
+      ),
     );
   };
 
@@ -62,8 +63,8 @@ export default function useTimerState() {
       new Date(
         new Date().getTime() +
           stateDurations[currentState].durationInMinutes *
-            MILLISECONDS_MULTIPLIER
-      )
+            MILLISECONDS_MULTIPLIER,
+      ),
     );
   };
 

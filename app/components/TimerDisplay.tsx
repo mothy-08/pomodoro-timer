@@ -19,8 +19,8 @@ export default function TimerDisplay({
   const formatTimeToString = (time: number) => String(time).padStart(2, "0");
 
   return (
-    <div className="relative flex aspect-square w-[300px] items-center justify-center">
-      <div className="absolute space-x-4 text-7xl font-bold">
+    <div className="relative flex aspect-square w-[280px] items-center justify-center">
+      <div className="absolute space-x-4 text-6xl font-bold">
         <span>{formatTimeToString(minutes)}</span>
         <span>:</span>
         <span>{formatTimeToString(seconds)}</span>

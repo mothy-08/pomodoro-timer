@@ -83,7 +83,7 @@ export default function ButtonGroup({
   const hideOnTimerExpire: string = isTimerExpired ? "hidden" : "";
 
   return (
-    <div className="flex items-center justify-center gap-3">
+    <div className="flex items-center justify-center gap-2">
       <Button
         title="Start"
         onClick={start}
