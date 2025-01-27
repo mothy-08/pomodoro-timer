@@ -69,7 +69,7 @@ export default function Home() {
       )}
       <div
         className={clsx(
-          "absolute bottom-5 flex items-center justify-center gap-1 rounded-lg font-bold text-green-400 transition-all duration-300",
+          "absolute bottom-5 flex items-center justify-center gap-1 rounded-lg font-bold text-[#93f5ca] transition-all duration-300",
           isSuccessful
             ? "visible -translate-y-0 opacity-100"
             : "invisibile translate-y-full opacity-0",
