@@ -14,6 +14,7 @@ export default function Home() {
     timerExpiry,
     isTimerExpired,
     totalWorkSessions,
+    setTotalWorkSessions,
     changeState,
     playTimerSound,
     autoStart,
@@ -52,6 +53,7 @@ export default function Home() {
         restartLongBreakTimer={() => changeState("longBreak")}
         autoStart={autoStart}
         totalWorkSessions={totalWorkSessions}
+        resetWorkSession={() => setTotalWorkSessions(0)}
         showTimerSettings={() => setVisible("showTimerSettings")}
       />
 

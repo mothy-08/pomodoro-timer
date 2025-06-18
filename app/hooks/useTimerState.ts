@@ -74,6 +74,7 @@ export default function useTimerState() {
     timerExpiry,
     isTimerExpired,
     totalWorkSessions,
+    setTotalWorkSessions,
     changeState,
     playTimerSound,
     autoStart,

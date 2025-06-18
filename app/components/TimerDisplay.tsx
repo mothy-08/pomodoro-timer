@@ -1,5 +1,6 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
+import clsx from "clsx";
 
 export default function TimerDisplay({
   minutes,
@@ -7,6 +8,7 @@ export default function TimerDisplay({
   percentage,
   color,
   totalWorkSessions,
+  resetWorkSession,
   showTimerSettings,
 }: {
   minutes: number;
@@ -14,6 +16,7 @@ export default function TimerDisplay({
   percentage: number;
   color: string;
   totalWorkSessions: number;
+  resetWorkSession: () => void;
   showTimerSettings: () => void;
 }) {
   const formatTimeToString = (time: number) => String(time).padStart(2, "0");
@@ -29,9 +32,34 @@ export default function TimerDisplay({
       <div className="absolute bottom-12 flex items-start justify-center gap-4 font-bold text-zinc-400">
         <div className="group relative flex items-center justify-center hover:text-zinc-100">
           <span
+            id="tooltip-restart-work-session"
+            role="tooltip"
+            className={clsx(
+              `invisible absolute -left-12 -top-4 z-10 text-nowrap text-xs`,
+              totalWorkSessions > 0 ? "group-hover:visible" : "",
+            )}
+          >
+            Reset Work Session{totalWorkSessions > 1 ? "s" : ""}
+          </span>
+          <button
+            aria-describedby="tooltip-restart-work-session"
+            className={clsx(
+              `material-symbols-outlined scale-x-[-1]`,
+              totalWorkSessions === 0 ? "text-zinc-500" : "",
+            )}
+            aria-label="Reset Work Session"
+            disabled={totalWorkSessions === 0 ? true : false}
+            onClick={resetWorkSession}
+          >
+            refresh
+          </button>
+        </div>
+
+        <div className="group relative flex items-center justify-center hover:text-zinc-100">
+          <span
             id="tooltip-work-session"
             role="tooltip"
-            className="invisible absolute -left-12 -top-4 z-10 text-nowrap text-xs group-hover:visible"
+            className="invisible absolute -left-6 -top-4 z-10 text-nowrap text-xs group-hover:visible"
           >
             Work Sessions
           </span>
@@ -49,7 +77,7 @@ export default function TimerDisplay({
           <span
             id="tooltip-configure-timer"
             role="tooltip"
-            className="invisible absolute -top-4 z-10 text-nowrap text-xs group-hover:visible"
+            className="invisible absolute -left-8 -top-4 z-10 text-nowrap text-xs group-hover:visible"
           >
             Configure Timer
           </span>

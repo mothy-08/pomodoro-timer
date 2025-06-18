@@ -16,6 +16,7 @@ export default function Timer({
   restartLongBreakTimer,
   autoStart,
   totalWorkSessions,
+  resetWorkSession,
   showTimerSettings,
 }: {
   timerExpiry: Date;
@@ -28,6 +29,7 @@ export default function Timer({
   restartLongBreakTimer: () => void;
   autoStart: boolean;
   totalWorkSessions: number;
+  resetWorkSession: () => void;
   showTimerSettings: () => void;
 }) {
   const {
@@ -94,7 +96,7 @@ export default function Timer({
     }
 
     return () => {
-      document.title = "Pomodoro Timer";
+      document.title = "Stay focused brother!";
     };
   }, [minutes, seconds, isTimerExpired, currentState]);
 
@@ -113,6 +115,10 @@ export default function Timer({
         percentage={calculateProgressBarPercentage()}
         color={progressBarColors}
         totalWorkSessions={totalWorkSessions}
+        resetWorkSession={() => {
+          restartWorkTimer();
+          resetWorkSession();
+        }}
         showTimerSettings={showTimerSettings}
       />
       <ButtonGroup
